@@ -1,0 +1,53 @@
+{% extends 'main/layout.html' %}
+
+{% block partners %}
+
+     <!--Page Title-->
+    <section class="page-title" style="background-image:url(/media/images/page_title/slide2.jpg);">
+    	<div class="auto-container">
+        	<div class="row clearfix">
+            	<!--Title -->
+            	<div class="title-column col-md-6 col-sm-8 col-xs-12">
+                	<h1>شرکت های همکار</h1>
+                </div>
+                <!--Bread Crumb -->
+                <div class="breadcrumb-column col-md-6 col-sm-4 col-xs-12">
+                    <ul class="bread-crumb clearfix">
+                        <li><a href="{% url "main" %}">خانه</a></li>
+                        <li class="active">همکاران</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--End Page Title-->
+
+    <!--Services Section Two-->
+    <section class="services-section-two grey-bg">
+    	<div class="auto-container">
+
+            <div class="row clearfix grid-blocks">
+
+                {% for each in Partners %}
+                    <!--Services Block Four-->
+                <div class="services-block-four col-md-4 col-sm-6 col-xs-12">
+                	<div class="inner-box wow fadeIn" data-wow-delay="0ms" data-wow-duration="1500ms">
+                    	<div class="image">
+                        	<a><img src="{{ each.thumbnail.url }}" alt="{{ each.name }}" height="250"></a>
+                        </div>
+                        <div class="lower-content">
+                            <h3><a>{{ each.name }}</a></h3>
+                            <div class="text">{{ each.short_desc }}</div>
+                        </div>
+                    </div>
+                </div>
+
+
+                {% endfor %}
+            </div>
+
+        </div>
+    </section>
+    <!--End Services Section Two-->
+
+{% endblock %}

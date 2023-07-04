@@ -1,0 +1,75 @@
+{% extends "main/layout.html" %}
+    {% block product_detail %}
+     <!--Page Title-->
+    <section class="page-title" style="background-image:url(/media/images/page_title/slide4.jpg);">
+    	<div class="auto-container">
+        	<div class="row clearfix">
+            	<!--Title -->
+            	<div class="title-column col-md-6 col-sm-8 col-xs-12">
+                	<h1>جزئیات محصول</h1>
+                </div>
+                <!--Bread Crumb -->
+                <div class="breadcrumb-column col-md-6 col-sm-4 col-xs-12">
+                    <ul class="bread-crumb clearfix">
+                        <li><a href="{% url 'main' %}">خانه</a></li>
+                        <li class="active">{{ product_detail.name }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--End Page Title-->
+    
+    <!--Project Single Section-->
+    <section class="project-single-section">
+    	<div class="auto-container">
+        	<h2>{{ product_detail.name }}</h2>
+            <div class="inner-box">
+                <div class="row clearfix">
+                    <div class="image-column col-md-5 col-sm-12 col-xs-12">
+                        <div class="image">
+                            <img src={% if product_detail.thumbnail_1 %}{{ product_detail.thumbnail_1.url }}{% else %}#{% endif %} alt={{ product_detail.name }}>
+                        </div>
+                    </div>
+                    <div class="content-column col-md-7 col-sm-12 col-xs-12">
+                        <div class="inner">
+                        	<div class="dark-text">{{ product_detail.short_desc }}</div>
+                            <div class="text">
+                            	<p></p>
+                                <div class="title">{{ product_detail.desc }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!--Project Info-->
+                <div class="project-info">
+                	<div class="project-inner">
+                    	<div class="clearfix">
+                        	<div class="column col-md-3 col-sm-6 col-xs-12">
+                            	<div class="title">نام مشتری</div>
+                                <div class="text">شرکت مایکروسافت</div>
+                            </div>
+                            <div class="column col-md-3 col-sm-6 col-xs-12">
+                            	<div class="title">تاریخ</div>
+                                <div class="text">12 آذر 1399</div>
+                            </div>
+                            <div class="column col-md-3 col-sm-6 col-xs-12">
+                            	<div class="title">نوع پروژه</div>
+                                <div class="text">ساخت و ساز، ساختمان، مسکونی</div>
+                            </div>
+                            <div class="column col-md-3 col-sm-6 col-xs-12">
+                            	<div class="title">وضعیت</div>
+                                <div class="text">در دست ساخت</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+    <!--End Project Single Section-->
+    
+
+    {% endblock %}

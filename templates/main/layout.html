@@ -1,0 +1,388 @@
+{% load static %}
+<!DOCTYPE html>
+<html dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>آرین توربین </title>
+<!-- Stylesheets -->
+<link href="{% static "css/bootstrap.css" %}" rel="stylesheet">
+<link href="{% static "css/style.css" %}" rel="stylesheet">
+<link href="{% static "css/responsive.css" %}" rel="stylesheet">
+
+<!--Color Switcher Mockup-->
+<link href="{% static "css/color-switcher-design.css" %}" rel="stylesheet">
+
+<!--Color Themes-->
+<link id="theme-color-file" href="{% static "css/color-themes/default-theme.css" %}" rel="stylesheet">
+<meta name="theme-color" content="#ffc11b">
+
+<!--Favicon-->
+<link rel="shortcut icon" href="{{ WebsiteSetting.favicon }}" type="image/x-icon">
+<link rel="icon" href="{{ WebsiteSetting.favicon }}" type="image/x-icon">
+<!-- Responsive -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<!--[if lt IE 9]><script src={% static "js/html5shiv.js" %}></script><![endif]-->
+<!--[if lt IE 9]><script src={% static "js/respond.js" %}></script><![endif]-->
+</head>
+
+<body>
+<div class="page-wrapper">
+
+    <!-- Preloader -->
+    <div class="preloader"></div>
+
+    <!-- Main Header-->
+    <header class="main-header">
+
+        <!--Header-Upper-->
+        <div class="header-upper">
+        	<div class="auto-container">
+            	<div class="clearfix">
+
+                	<div class="pull-left logo-outer">
+                    	<div class="logo"><a href={% url 'main' %}><img src="{{ WebsiteSetting.logo.url }}" alt="آرین توربین" title=""></a></div>
+                    </div>
+
+                    <div class="pull-right upper-right clearfix">
+
+                        <!--Info Box-->
+                        <div class="info-box">
+                        	<div class="inner-box">
+                                <div class="icon-box"><span class="flaticon-technology"></span></div>
+                                <ul>
+                                    <li>با ما تماس بگیرید</li>
+                                    <li><strong class="ltr-text">{{ WebsiteSetting.phone_number }}</strong></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!--Info Box-->
+                        <div class="info-box">
+                        	<div class="inner-box">
+                                <div class="icon-box"><span class="flaticon-location-pin"></span></div>
+                                <ul>
+                                    <li>ایمیل</li>
+                                    <li><strong>{{ WebsiteSetting.email }}</strong></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!--Info Box-->
+                        <div class="info-box"><!--search-box-->
+                        	<!--Quote Btn-->
+                        	<div class="quote-btn"><a href="{% url 'contact' %}" class="get-quote-btn theme-btn">ارتباط با ما</a></div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!--End Header Upper-->
+
+        <!--Header Lower-->
+        <div class="header-lower">
+            <div class="auto-container">
+                <div class="outer-box">
+                    <div class="nav-outer clearfix">
+                        <!-- Main Menu -->
+                        <nav class="main-menu">
+                            <div class="navbar-header clearfix">
+                                <!-- Toggle Button -->
+                                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                </button>
+                            </div>
+
+                            <div class="navbar-collapse collapse clearfix">
+                                <ul class="navigation clearfix">
+                                    {% for each in nav_menu %}
+                                        {% if each.product|length != 0 %}
+                                                <li class="dropdown"><a href="{{ each.link }}">{{ each.name }}</a>
+                                        <ul>
+                                            {% for product in each.product %}
+                                            <li><a href="{% url 'product_list'  id=product.id %}">{{ product.name }}</a></li>
+                                            {% endfor %}
+
+                                        </ul>
+                                    </li>
+
+
+                                        {% else %}
+                                            <li><a href={{ each.link }}>{{ each.name }}</a></li>
+                                        {% endif %}
+                                    {% endfor %}
+
+
+
+
+
+                                </ul>
+                            </div>
+                        </nav>
+                        <!-- Main Menu End-->
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--End Header Lower-->
+
+        <!--Sticky Header-->
+        <div class="sticky-header">
+        	<div class="auto-container clearfix">
+            	<!--Logo-->
+            	<div class="logo pull-left">
+                	<a href="{% url "main" %}" class="img-responsive"><img src="{{ WebsiteSetting.logo_small.url }}" alt="" title=""></a>
+                </div>
+
+                <!--Right Col-->
+                <div class="right-col pull-right">
+                	<!-- Main Menu -->
+                    <nav class="main-menu">
+                        <div class="navbar-header">
+                            <!-- Toggle Button -->
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                        </div>
+
+                        <div class="navbar-collapse collapse clearfix">
+                            <ul class="navigation clearfix">
+                                {% for each in nav_menu %}
+                                        {% if each.product|length != 0  %}
+                                            <li class="dropdown"><a href="{% url "product_category" %}">{{ each.name }}</a>
+                                            <ul>
+                                           {% for product in each.product %}
+                                               <li><a href="{% url 'product_list' id=product.id %}">{{ product.name }}</a></li>
+                                            {% endfor %}
+                                            </ul>
+                                            </li>
+                                         {% else %}
+                                            <li><a href="{{ each.link }}">{{ each.name }}</a></li>
+                                        {% endif %}
+                                    {% endfor %}
+
+                            </ul>
+                        </div>
+                    </nav><!-- Main Menu End-->
+                </div>
+
+            </div>
+        </div>
+        <!--End Sticky Header-->
+
+    </header>
+    <!--End Main Header -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% block content_list %}
+{% endblock %}
+
+{% block blog_single %}
+{% endblock %}
+
+{% block product_list %}
+{% endblock %}
+
+{% block product_detail %}
+{% endblock %}
+
+{%  block about_us %}
+{% endblock %}
+
+{% block contact %}
+{% endblock %}
+
+{% block error %}
+{% endblock %}
+
+
+{% block partners %}
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <!--Main Footer-->
+    <footer class="main-footer">
+		<div class="widgets-section">
+        	<div class="auto-container">
+            	<div class="row clearfix">
+                	<!--Big Column-->
+                    <div class="big-column col-md-6 col-sm-12 col-xs-12">
+                    	<div class="row clearfix">
+
+                            <!--Footer Column-->
+                            <div class="footer-column col-md-7 col-sm-6 col-xs-12">
+                                <!--Logo Widget-->
+                                <div class="footer-widget logo-widget">
+                                	<div class="widget-content">
+                                    	<div class="footer-logo">
+                                        	<a href="{% url 'main' %}"><img src="{{ WebsiteSetting.footer_logo.url }}" alt=""></a>
+                                        </div>
+										<div class="text">{{ WebsiteSetting.about }}</div>
+                                        <ul class="social-icon-two">
+                                            <li><a href="#"><span class="fa fa-facebook"></span></a></li>
+                                            <li><a href="#"><span class="fa fa-twitter"></span></a></li>
+                                            <li><a href="#"><span class="fa fa-linkedin"></span></a></li>
+                                            <li><a href="#"><span class="fa fa-pinterest-p"></span></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <!--Footer Column / Links Widget-->
+                        	<div class="footer-column col-md-5 col-sm-6 col-xs-12">
+                            	<div class="footer-widget links-widget">
+                                	<h2>دسترسی سریع</h2>
+                                    <div class="widget-content">
+                                        <ul class="list">
+                                            {% for each in nav_menu %}
+                                            <li><a href={{ each.link }}>{{ each.name }}</a></li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                    <!--Big Column-->
+                    <div class="big-column col-md-6 col-sm-12 col-xs-12">
+                    	<div class="row clearfix">
+
+                    		<!--Footer Column-->
+                            <div class="footer-column col-md-6 col-sm-6 col-xs-12">
+                                <div class="footer-widget address-widget">
+                                    <h2>آدرس ما</h2>
+                                    <div class="widget-content">
+                                        <ul class="list-style-one">
+                                            <li><span class="icon fa fa-map-marker"></span>{{ WebsiteSetting.address }}</li>
+                                            <li><span class="icon fa fa-phone"></span><span class="ltr-text">{{ WebsiteSetting.phone_number }}</span></li>
+                                            <li><span class="icon fa fa-envelope"></span>{{ WebsiteSetting.email }}</li>
+                                            <li><span class="icon fa fa-clock-o"></span>{{ WebsiteSetting.work_time }}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                        	<!--Footer Column-->
+                            <div class="footer-column col-md-6 col-sm-6 col-xs-12">
+                                <div class="footer-widget subscribe-widget">
+                                   <h2>ارتباط با ما</h2>
+                                   <div class="widget-content">
+                                        <div class="newsletter-form">
+                                            <form method="post" action="contact.html">
+                                                <div class="form-group">
+                                                    <input type="text" name="name" value="" placeholder="نام شما" required="">
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="email" name="email" value="" placeholder="ایمیل شما" required="" class="text-left" dir="ltr">
+                                                </div>
+                                                <div class="form-group">
+                                                    <button type="submit" class="theme-btn btn-style-one">ثبت اطلاعات</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!--Footer Bottom-->
+        <div class="footer-bottom">
+        	<div class="auto-container">
+            	<div class="row clearfix">
+                    <div class="column col-md-6 col-sm-6 col-xs-12">
+                        <div class="copyright">ارائه شده در وب‌سایت <a href="www.karyo.ir" target="_blank">karyo</a></div>
+                    </div>
+                    <div class="column col-md-6 col-sm-6 col-xs-12">
+                        <ul class="footer-nav">
+                        	<li><a href="{% url "main" %}">خانه</a></li>
+                            <li><a href="{% url "aboutus" %}">درباره ما</a></li>
+                            <li><a href="{% url "contact" %}">تماس با ما</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</div>
+<!--End pagewrapper-->
+
+<!--Scroll to top-->
+<div class="scroll-to-top scroll-to-target" data-target="html"><span class="icon fa fa-long-arrow-up"></span></div>
+
+
+
+
+<script src={% static "js/jquery.js"%}></script>
+<script src={% static "js/bootstrap.min.js"%}></script>
+<script src={% static "js/jquery.fancybox.pack.js"%}></script>
+<script src={% static "js/jquery.fancybox-media.js"%}></script>
+<script src={% static "js/owl.js"%}></script>
+<script src={% static "js/appear.js"%}></script>
+<script src={% static "js/wow.js"%}></script>
+<script src={% static "js/script.js"%}></script>
+
+
+<!--Color Switcher-->
+<script src={% static "js/color-settings.js"%}></script>
+
+
+
+</body>
+</html>

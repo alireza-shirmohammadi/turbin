@@ -1,0 +1,612 @@
+{% load static%}
+
+<!DOCTYPE html>
+<html dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>خانه | آرین توربین</title>
+<!-- Stylesheets -->
+<link href={% static '/css/bootstrap.css' %} rel="stylesheet">
+<link href={% static "plugins/revolution/css/settings.css"%} rel="stylesheet" type="text/css"><!-- REVOLUTION SETTINGS STYLES -->
+<link href={% static "plugins/revolution/css/layers.css"%} rel="stylesheet" type="text/css"><!-- REVOLUTION LAYERS STYLES -->
+<link href={% static "plugins/revolution/css/navigation.css"%} rel="stylesheet" type="text/css"><!-- REVOLUTION NAVIGATION STYLES -->
+<link href={% static "css/style.css"%} rel="stylesheet">
+<link href={% static "css/responsive.css"%} rel="stylesheet">
+
+<!--Color Switcher Mockup-->
+<link href={% static "css/color-switcher-design.css"%} rel="stylesheet">
+
+<!--Color Themes-->
+<link id="theme-color-file" href={% static "css/color-themes/default-theme.css"%} rel="stylesheet">
+<meta name="theme-color" content="#ffc11b">
+
+<!--Favicon-->
+<link rel="shortcut icon" href={{ WebsiteSetting.favicon.url }}  type="image/x-icon">
+<link rel="icon" href= {{ WebsiteSetting.favicon.url }}  type="image/x-icon">
+<!-- Responsive -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<!--[if lt IE 9]><script src={% static "js/html5shiv.js" %}></script><![endif]-->
+<!--[if lt IE 9]><script src={% static "js/respond.js" %}></script><![endif]-->
+</head>
+
+<body>
+<div class="page-wrapper">
+
+    <!-- Preloader -->
+    <div class="preloader"></div>
+
+    <!-- Main Header-->
+    <header class="main-header">
+
+        <!--Header-Upper-->
+        <div class="header-upper">
+        	<div class="auto-container">
+            	<div class="clearfix">
+
+                	<div class="pull-left logo-outer">
+                    	<div class="logo"><a href="{% url 'main' %}"><img src="{{ WebsiteSetting.logo.url }}" alt="آرین توربین" title=""></a></div>
+                    </div>
+
+                    <div class="pull-right upper-right clearfix">
+
+                        <!--Info Box-->
+                        <div class="info-box">
+                        	<div class="inner-box">
+                                <div class="icon-box"><span class="flaticon-technology"></span></div>
+                                <ul>
+                                    <li>با ما تماس بگیرید</li>
+                                    <li><strong class="ltr-text">{{ WebsiteSetting.phone_number }}</strong></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!--Info Box-->
+                        <div class="info-box">
+                        	<div class="inner-box">
+                                <div class="icon-box"><span class="flaticon-location-pin"></span></div>
+                                <ul>
+                                    <li>ایمیل</li>
+                                    <li><strong>{{ WebsiteSetting.email }}</strong></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!--Info Box-->
+                        <div class="info-box"><!--search-box-->
+                        	<!--Quote Btn-->
+                        	<div class="quote-btn"><a href="{% url 'contact' %}" class="get-quote-btn theme-btn">ارتباط با ما</a></div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!--End Header Upper-->
+
+        <!--Header Lower-->
+        <div class="header-lower">
+            <div class="auto-container">
+                <div class="outer-box">
+                    <div class="nav-outer clearfix">
+                        <!-- Main Menu -->
+                        <nav class="main-menu">
+                            <div class="navbar-header clearfix">
+                                <!-- Toggle Button -->
+                                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                </button>
+                            </div>
+
+                            <div class="navbar-collapse collapse clearfix">
+                                <ul class="navigation clearfix">
+                                    {% for each in nav_menu %}
+                                        {% if each.product|length != 0 %}
+                                                <li class="dropdown"><a href="{{ each.link }}">{{ each.name }}</a>
+                                        <ul>
+                                            {% for product in each.product %}
+                                            <li><a href="{% url 'product_list' id=product.id %}">{{ product.name }}</a></li>
+                                            {% endfor %}
+
+                                        </ul>
+                                    </li>
+
+
+                                        {% else %}
+                                            <li><a href={{ each.link }}>{{ each.name }}</a></li>
+                                        {% endif %}
+                                    {% endfor %}
+
+
+
+
+
+                                </ul>
+                            </div>
+                        </nav>
+                        <!-- Main Menu End-->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--End Header Lower-->
+
+        <!--Sticky Header-->
+        <div class="sticky-header">
+        	<div class="auto-container clearfix">
+            	<!--Logo-->
+            	<div class="logo pull-left">
+                	<a href="{% url "main" %}" class="img-responsive"><img src= "/media/images/template/logo-small.png" alt="" title=""></a>
+                </div>
+
+                <!--Right Col-->
+                <div class="right-col pull-right">
+                	<!-- Main Menu -->
+                    <nav class="main-menu">
+                        <div class="navbar-header">
+                            <!-- Toggle Button -->
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                        </div>
+
+                        <div class="navbar-collapse collapse clearfix">
+                            <ul class="navigation clearfix">
+                                {% for each in nav_menu %}
+                                        {% if each.name == "خانه"  %}
+                                            <li class="dropdown current"><a href="{% url "main" %}">{{ each.name }}</a>
+
+                                </li>
+                                        {% elif each.product|length != 0  %}
+                                            <li class="dropdown"><a href="{{ each.link }}">{{ each.name }}</a>
+                                            <ul>
+                                           {% for product in each.product %}
+                                               <li><a href="{% url 'product_list' id=product.id %}">{{ product.name }}</a></li>
+                                            {% endfor %}
+                                            </ul>
+                                            </li>
+                                         {% else %}
+                                            <li><a href="{{ each.link }}">{{ each.name }}</a></li>
+                                        {% endif %}
+                                    {% endfor %}
+
+                            </ul>
+                        </div>
+                    </nav><!-- Main Menu End-->
+                </div>
+
+            </div>
+        </div>
+        <!--End Sticky Header-->
+
+    </header>
+    <!--End Main Header -->
+
+	<!--Main Slider-->
+    <section class="main-slider" style="max-height:500px;">
+
+        <div class="rev_slider_wrapper fullwidthbanner-container"  id="rev_slider_one_wrapper" data-source="gallery">
+            <div class="rev_slider fullwidthabanner"  id="rev_slider_one" data-version="5.4.1">
+                <ul>
+
+                    {% for slide in Slider %}
+                        <li
+					data-description="توضیح اسلاید"
+					data-easein="default"
+					data-easeout="default"
+					data-fsmasterspeed="1500"
+					data-fsslotamount="7"
+					data-fstransition="fade"
+					data-hideafterloop="0"
+					data-hideslideonmobile="off"
+					data-index="rs-1687"
+					data-masterspeed="default"
+					data-param1=""
+					data-param10=""
+					data-param2=""
+					data-param3=""
+					data-param4=""
+					data-param5=""
+					data-param6=""
+					data-param7=""
+					data-param8=""
+					data-param9=""
+					data-rotate="0"
+					data-saveperformance="off"
+					data-slotamount="default"
+					data-thumb=  "/media/images/template/main-slider/image-1.jpg"
+					data-title="عنوان اسلاید"
+					data-transition="parallaxvertical">
+
+						<img
+						alt=""
+						class="rev-slidebg"
+						data-bgfit="cover"
+						data-bgparallax="10"
+						data-bgposition="center center"
+						data-bgrepeat="no-repeat"
+						data-no-retina=""
+						src= {{ slide.image.url}} >
+
+						<div
+						class="tp-caption"
+						data-paddingbottom="[0,0,0,0]"
+						data-paddingleft="[0,0,0,0]"
+						data-paddingright="[0,0,0,0]"
+						data-paddingtop="[0,0,0,0]"
+						data-responsive_offset="on"
+						data-type="text"
+						data-height="none"
+						data-width="['1100','1024','400','320']"
+						data-whitespace="normal"
+						data-hoffset="['15','15','15','15']"
+						data-voffset="['-30','-65','-80','-80']"
+						data-x="['right','right','right','right']"
+						data-y="['middle','middle','middle','middle']"
+						data-textalign="['top','top','top','top']"
+						data-frames='[{"from":"y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;s:inherit;e:inherit;","speed":1500,"to":"o:1;","delay":1000,"ease":"Power3.easeInOut"},{"delay":"wait","speed":1000,"to":"auto:auto;","mask":"x:0;y:0;s:inherit;e:inherit;","ease":"Power3.easeInOut"}]'
+						style="z-index: 7; white-space: nowrap;text-transform:right;">
+{#							<h2>{{ slide.title}}</h2>#}
+                            <h2>{{ slide.title}}</h2>
+						</div>
+
+						<div
+						class="tp-caption"
+						data-paddingbottom="[0,0,0,0]"
+						data-paddingleft="[0,0,0,0]"
+						data-paddingright="[0,0,0,0]"
+						data-paddingtop="[0,0,0,0]"
+						data-responsive_offset="on"
+						data-type="text"
+						data-height="none"
+						data-width="['1100','600','400','320']"
+						data-whitespace="normal"
+						data-hoffset="['15','15','15','15']"
+						data-voffset="['110','60','15','0']"
+						data-x="['right','right','right','right']"
+						data-y="['middle','middle','middle','middle']"
+						data-textalign="['top','top','top','top']"
+						data-frames='[{"from":"y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;s:inherit;e:inherit;","speed":1500,"to":"o:1;","delay":1000,"ease":"Power3.easeInOut"},{"delay":"wait","speed":1000,"to":"auto:auto;","mask":"x:0;y:0;s:inherit;e:inherit;","ease":"Power3.easeInOut"}]'
+						style="z-index: 7; white-space: nowrap;text-transform:right;">
+							<div class="text">{{ slide.short_desc}}</div>
+						</div>
+
+						<div
+						class="tp-caption tp-resizeme"
+						data-paddingbottom="[0,0,0,0]"
+						data-paddingleft="[0,0,0,0]"
+						data-paddingright="[0,0,0,0]"
+						data-paddingtop="[0,0,0,0]"
+						data-responsive_offset="on"
+						data-type="text"
+						data-height="none"
+						data-width="['900','600','400','320']"
+						data-whitespace="normal"
+						data-hoffset="['15','15','15','15']"
+						data-voffset="['190','150','90','80']"
+						data-x="['right','right','right','right']"
+						data-y="['middle','middle','middle','middle']"
+						data-textalign="['top','top','top','top']"
+						data-frames='[{"from":"y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;s:inherit;e:inherit;","speed":1500,"to":"o:1;","delay":1000,"ease":"Power3.easeInOut"},{"delay":"wait","speed":1000,"to":"auto:auto;","mask":"x:0;y:0;s:inherit;e:inherit;","ease":"Power3.easeInOut"}]'
+						style="z-index: 7; white-space: nowrap;text-transform:right;">
+							<a href="{{ slide.link }}" class="theme-btn btn-style-one">آشنایی بیشتر</a>
+						</div>
+
+                    </li>
+                    {% endfor %}
+
+                </ul>
+            </div>
+        </div>
+    </section>
+    <!--End Main Slider-->
+
+    <!--Welcome Section-->
+    <section class="welcome-section">
+    	<div class="auto-container">
+        	<!--Welcome Title-->
+        	<div class="welcome-title">
+            	<div class="row clearfix">
+                    <div class="column col-md-3 col-sm-12 col-xs-12">
+                        <h2>آرین <span class="theme_color">توربین</span></h2>
+                    </div>
+                    <div class="column col-md-9 col-sm-12 col-xs-12">
+                        <div class="text">{{ WebsiteSetting.desc }}</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row clearfix grid-blocks">
+                <!--Services Block-->
+                {% for each in Category %}
+                    <div class="services-block col-md-4 col-sm-6 col-xs-12">
+                	<div class="inner-box">
+                    	<div class="image wow fadeIn" data-wow-delay="0ms" data-wow-duration="1500ms">
+                        	<a href="{% url 'product_list' id=each.id %}"><img src="{{ each.thumbnail.url }}" alt="{{ each.name }}" height=236></a>
+                        </div>
+                        <div class="lower-content">
+                        	<a href="{% url 'product_list' id=each.id %}" class="arrow-box"><span class="arrow flaticon-forward-arrow"></span></a>
+                        	<h3><a href="{% url 'product_list' id=each.id %}">{{ each.name }}</a></h3>
+                            <div class="text">{{ each.short_desc }}</div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+
+
+
+
+            </div>
+
+        </div>
+    </section>
+    <!--End Welcome Section-->
+
+<!--Process Section-->
+    <section class="process-section">
+    	<div class="auto-container">
+        	<!--Sec Title-->
+        	<div class="sec-title centered">
+            	<h2>خدمات ما</h2>
+            </div>
+            <div class="row clearfix grid-blocks">
+
+				<!--Services Block Two-->
+            	<div class="services-block-two col-md-4 col-sm-6 col-xs-12">
+                	<div class="inner-box">
+                    	<div class="icon-box wow zoomInStable" data-wow-delay="0ms" data-wow-duration="2500ms">
+
+                            <span class="icon flaticon-transport"></span>
+
+                        </div>
+                        <h3><a>بازسازی و پوشش دهی قطعات توربین</a></h3>
+                        <div class="text">قطعات توربین در دوره های مختلف کار نیاز به بازسازی و پوشش دهی مجدد دارند تا بتوانند در دوره های بعد کاری مورد استفاده قرار بگیرند . این شرکت با استفاده از از همکاران داخلی و خارجی خود آمادگی ارايه این خدمات را دارد.</div>
+                    </div>
+                </div>
+
+                <!--Services Block Two-->
+            	<div class="services-block-two col-md-4 col-sm-6 col-xs-12">
+                	<div class="inner-box">
+                    	<div class="icon-box wow zoomInStable" data-wow-delay="500ms" data-wow-duration="2500ms">
+                        	<span class="icon flaticon-protractor"></span>
+                        </div>
+                        <h3><a>بهینه سازی عملکرد توربین</a></h3>
+                        <div class="text">عملکرد توربین های گازی تحت تاثیر عوامل مختلف از جمله طراحی اولیه و شرایط کاری است . بازنگری این عوامل و بهبود آنها میتواند منجر به بهینه سازی عملکرد توربین و افزایش راندمان آن شود</div>
+                    </div>
+                </div>
+
+                <!--Services Block Two-->
+            	<div class="services-block-two col-md-4 col-sm-6 col-xs-12">
+                	<div class="inner-box">
+                    	<div class="icon-box wow zoomInStable" data-wow-delay="1000ms" data-wow-duration="2500ms">
+                        	<span class="icon flaticon-idea"></span>
+                        </div>
+                        <h3><a>مشاوره در انتخاب</a></h3>
+                        <div class="text">برای انتخاب مناسب ترین تجهیزات و سیستم های پوشش دهی با توجه به نیازتان با ما مشورت کنید</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!--End Process Section-->
+
+    <!--News Section-->
+    <section class="news-section">
+    	<div class="auto-container">
+        	<!--Sec Title-->
+            <div class="sec-title">
+            	<h2>وبلاگ</h2>
+            </div>
+            <div class="three-item-carousel owl-carousel owl-theme">
+
+                {% for news in Blog %}
+                    <!--News Block-->
+                <div class="news-block">
+                	<div class="inner-box">
+                    	<div class="image">
+                        	<a href="{% url "detail_blog" id=news.id %}"><img src={% if news.thumbnail %}{{ news.thumbnail.url }}{% else %}#{% endif %} alt="{{ news.title }}" height=236></a>
+                        </div>
+                        <div class="lower-content">
+                        	<div class="post-date">ارسال شده {{ news.jpublish }}</div>
+                            <h3><a href="{% url "detail_blog" id=news.id %}">{{ news.title }}</a></h3>
+                            <div class="text">{{ news.short_desc }}</div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <!--End News Section-->
+
+<!--FullWidth Gallery Section-->
+    <section class="fullwidth-gallery-section">
+    	<div class="gallery-outer clearfix grid-blocks">
+
+            {% for partner in Partners %}
+                <div class="gallery-block col-md-4 col-sm-6 col-xs-12">
+            	<div class="inner-box">
+                	<div class="image">
+                    	<img src={% if partner.thumbnail %}{{ partner.thumbnail.url }}{% else %}#{% endif %} alt={{ partner.name }}  height="400">
+                    </div>
+                    <div class="overlay-box">
+                    	<div class="content">
+                        	<h2><a href="{% url 'partners' %}">{{ partner.name }}</a></h2>
+                            <div class="title">{{ partner.short_desc }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% endfor %}
+
+        </div>
+    </section>
+    <!--End FullWidth Gallery Section-->
+
+
+
+
+    <!--Main Footer-->
+    <footer class="main-footer">
+		<div class="widgets-section">
+        	<div class="auto-container">
+            	<div class="row clearfix">
+                	<!--Big Column-->
+                    <div class="big-column col-md-6 col-sm-12 col-xs-12">
+                    	<div class="row clearfix">
+
+                            <!--Footer Column-->
+                            <div class="footer-column col-md-7 col-sm-6 col-xs-12">
+                                <!--Logo Widget-->
+                                <div class="footer-widget logo-widget">
+                                	<div class="widget-content">
+                                    	<div class="footer-logo">
+                                        	<a href="{% url "main" %}"><img src="{{ WebsiteSetting.footer_logo.url }}" alt=""></a>
+                                        </div>
+										<div class="text">{{ WebsiteSetting.about }}</div>
+                                        <ul class="social-icon-two">
+                                            <li><a href="#"><span class="fa fa-facebook"></span></a></li>
+                                            <li><a href="#"><span class="fa fa-twitter"></span></a></li>
+                                            <li><a href="#"><span class="fa fa-linkedin"></span></a></li>
+                                            <li><a href="#"><span class="fa fa-pinterest-p"></span></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <!--Footer Column / Links Widget-->
+                        	<div class="footer-column col-md-5 col-sm-6 col-xs-12">
+                            	<div class="footer-widget links-widget">
+                                	<h2>دسترسی سریع</h2>
+                                    <div class="widget-content">
+                                        <ul class="list">
+                                            {% for each in nav_menu %}
+                                            <li><a href={{ each.link }}>{{ each.name }}</a></li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                    <!--Big Column-->
+                    <div class="big-column col-md-6 col-sm-12 col-xs-12">
+                    	<div class="row clearfix">
+
+                    		<!--Footer Column-->
+                            <div class="footer-column col-md-6 col-sm-6 col-xs-12">
+                                <div class="footer-widget address-widget">
+                                    <h2>آدرس ما</h2>
+                                    <div class="widget-content">
+                                        <ul class="list-style-one">
+                                            <li><span class="icon fa fa-map-marker"></span>{{ WebsiteSetting.address }}</li>
+                                            <li><span class="icon fa fa-phone"></span><span class="ltr-text">{{ WebsiteSetting.phone_number }}</span></li>
+                                            <li><span class="icon fa fa-envelope"></span>{{ WebsiteSetting.email }}</li>
+                                            <li><span class="icon fa fa-clock-o"></span>{{ WebsiteSetting.work_time }}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                        	<!--Footer Column-->
+                            <div class="footer-column col-md-6 col-sm-6 col-xs-12">
+                                <div class="footer-widget subscribe-widget">
+                                   <h2>ارتباط با ما</h2>
+                                   <div class="widget-content">
+                                        <div class="newsletter-form">
+                                            <form method="post" action="contact.html">
+                                                <div class="form-group">
+                                                    <input type="text" name="name" value="" placeholder="نام شما" required="">
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="email" name="email" value="" placeholder="ایمیل شما" required="" class="text-left" dir="ltr">
+                                                </div>
+                                                <div class="form-group">
+                                                    <button type="submit" class="theme-btn btn-style-one">ثبت اطلاعات</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!--Footer Bottom-->
+        <div class="footer-bottom">
+        	<div class="auto-container">
+            	<div class="row clearfix">
+                    <div class="column col-md-6 col-sm-6 col-xs-12">
+                        <div class="copyright">ارائه شده در وب‌سایت <a href="www.karyo.ir" target="_blank">karyo</a></div>
+                    </div>
+                    <div class="column col-md-6 col-sm-6 col-xs-12">
+                        <ul class="footer-nav">
+                        	<li><a href="{% url "main" %}">خانه</a></li>
+                            <li><a href="{% url "aboutus" %}">درباره ما</a></li>
+                            <li><a href="{% url "contact" %}">تماس با ما</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</div>
+
+
+<!--End pagewrapper-->
+
+<!--Scroll to top-->
+<div class="scroll-to-top scroll-to-target" data-target="html"><span class="icon fa fa-long-arrow-up"></span></div>
+
+
+
+
+
+
+<script src={% static "js/jquery.js" %} ></script>
+<!--Revolution Slider-->
+<script src={% static "plugins/revolution/js/jquery.themepunch.revolution.min.js" %} ></script>
+<script src={% static "plugins/revolution/js/jquery.themepunch.tools.min.js" %} ></script>
+<script src={% static "plugins/revolution/js/extensions/revolution.extension.actions.min.js" %} ></script>
+<script src={% static "plugins/revolution/js/extensions/revolution.extension.carousel.min.js" %} ></script>
+<script src={% static "plugins/revolution/js/extensions/revolution.extension.kenburn.min.js" %} ></script>
+<script src={% static "plugins/revolution/js/extensions/revolution.extension.layeranimation.min.js" %} ></script>
+<script src={% static "plugins/revolution/js/extensions/revolution.extension.migration.min.js" %} ></script>
+<script src={% static "plugins/revolution/js/extensions/revolution.extension.navigation.min.js" %} ></script>
+<script src={% static "plugins/revolution/js/extensions/revolution.extension.parallax.min.js" %} ></script>
+<script src={% static "plugins/revolution/js/extensions/revolution.extension.slideanims.min.js" %} ></script>
+<script src={% static "plugins/revolution/js/extensions/revolution.extension.video.min.js" %} ></script>
+
+<script src={% static "js/bootstrap.min.js" %} ></script>
+<script src={% static "js/jquery.fancybox.pack.js" %} ></script>
+<script src={% static "js/jquery.fancybox-media.js" %} ></script>
+<script src={% static "js/owl.js" %} ></script>
+<script src={% static "js/appear.js" %} ></script>
+<script src={% static "js/wow.js" %} ></script>
+<script src={% static "js/mixitup.js" %} ></script>
+<script src={% static "js/main-slider-script.js" %} ></script>
+<script src={% static "js/script.js" %} ></script>
+
+
+<!--Color Switcher-->
+<script src={% static "js/color-settings.js" %} ></script>
+</body>
+</html>

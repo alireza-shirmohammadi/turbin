@@ -1,0 +1,107 @@
+{% extends "main/layout.html"  %}
+
+{% block blog_single %}
+
+     <!--Page Title-->
+    <section class="page-title" style="background-image:url(/media/images/page_title/slide4.jpg);">
+    	<div class="auto-container">
+        	<div class="row clearfix">
+            	<!--Title -->
+            	<div class="title-column col-md-6 col-sm-8 col-xs-12">
+                	<h1>{{ content.title }}</h1>
+                </div>
+                <!--Bread Crumb -->
+                <div class="breadcrumb-column col-md-6 col-sm-4 col-xs-12">
+                    <ul class="bread-crumb clearfix">
+                        <li><a href="{% url "main" %}">خانه</a></li>
+                        <li class="active">اخبار ما</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--End Page Title-->
+    
+    <!--Sidebar Page Container-->
+    <div class="sidebar-page-container">
+    	<div class="auto-container">
+        	<div class="row clearfix">
+
+                <!--Content Side / Blog Single-->
+                <div class="content-side col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                	<div class="blog-single">
+
+                        <!--News Block Two-->
+                        <div class="news-block-two">
+                            <div class="inner-box">
+                                <div class="image">
+                                    <img src="{{ content.thumbnail.url }}" alt="{{ content.title }}">
+                                </div>
+                                <div class="lower-content">
+                                    <div class="post-date">{{ content.jpublish }}</div>
+                                    <h3>{{ content.title }}</h3>
+                                    <div class="text">
+                                    	<p>{{ content.short_desc }}</p>
+                                        <p>{{ content.content|safe }}</p>
+                                    </div>
+                                </div>
+                                <!--post-share-options-->
+                                <div class="post-share-options clearfix">
+                                    <div class="pull-left tags"><a>{{ content.author }}</a></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+                <!--Sidebar Side-->
+                <div class="sidebar-side col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                	<aside class="sidebar blog-sidebar">
+
+
+
+
+                        <!-- Popular Posts -->
+                        <div class="sidebar-widget popular-posts">
+                            <div class="sidebar-title"><h2>دیگر مطالب</h2></div>
+                            {% for each in contents %}
+                                <article class="post">
+                            	<figure class="post-thumb"><a href="{% url "detail_blog" id=each.id %}"><img src="{{ each.thumbnail.url }}" alt="{{ each.title }}"></a></figure>
+                                <div class="text"><a href="{% url "detail_blog" id=each.id %}">{{ each.title }}</a></div>
+                                <div class="post-info">{{ each.jpublish }}</div>
+                            </article>
+
+                            {% endfor %}
+
+
+
+
+
+                        </div>
+
+                        <!-- Popular Tags -->
+                        <div class="sidebar-widget popular-tags">
+                            <div class="sidebar-title"><h2>کلمات کلیدی</h2></div>
+                            {% for tag in keywords %}
+                            <a>{{ tag }}</a>
+                            {% endfor %}
+                        </div>
+
+
+
+                    </aside>
+                </div>
+                <!--End Sidebar Side-->
+
+            </div>
+        </div>
+    </div>
+
+
+    
+
+{% endblock %}

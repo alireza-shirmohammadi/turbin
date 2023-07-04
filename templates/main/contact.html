@@ -1,0 +1,93 @@
+{% extends "main/layout.html" %}
+{% load static %}
+{%  block contact %}
+
+     <!--Page Title-->
+    <section class="page-title" style="background-image:url(/media/images/page_title/slide5.jpg);">
+    	<div class="auto-container">
+        	<div class="row clearfix">
+            	<!--Title -->
+            	<div class="title-column col-md-6 col-sm-8 col-xs-12">
+                	<h1>تماس با ما</h1>
+                </div>
+                <!--Bread Crumb -->
+                <div class="breadcrumb-column col-md-6 col-sm-4 col-xs-12">
+                    <ul class="bread-crumb clearfix">
+                        <li><a href="{% url "main" %}">خانه</a></li>
+                        <li class="active">تماس با ما</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--End Page Title-->
+
+    <!--Contact Section-->
+    <section class="contact-section">
+    	<div class="auto-container">
+        	<div class="row clearfix">
+            	<!--Column-->
+            	<div class="column col-md-8 col-sm-12 col-xs-12">
+                	<h2>یک پیام ارسال کنید</h2>
+                    <div class="contact-form">
+                    	<!--Comment Form-->
+                        <form method="post" action="php/sendemail.php" id="contact-form1">
+                            <div class="row clearfix">
+                            	<div class="column col-md-6 col-sm-6 col-xs-12">
+                                    <!--Form Group-->
+                                    <div class="form-group">
+                                        <input type="text" name="username" placeholder="نام شما *" required>
+
+                                    </div>
+                                    <!--Form Group-->
+                                    <div class="form-group">
+                                        <input type="email" name="email" placeholder="* ایمیل" required dir="ltr" class="text-left">
+                                    </div>
+                                    <!--Form Group-->
+                                    <div class="form-group">
+                                        <input type="text" name="subject" placeholder="موضوع *" required>
+                                    </div>
+                                </div>
+                                <div class="column col-md-6 col-sm-6 col-xs-12">
+                                    <!--Form Group-->
+                                    <div class="form-group">
+                                        <textarea name="message" placeholder="پیام شما *" required></textarea>
+                                    </div>
+                                </div>
+                                <div class="column col-md-12 col-sm-12 col-xs-12">
+                                    <div class="form-group">
+                                        <button class="theme-btn btn-style-one" type="submit" name="submit-form">ارسال پیام</button>
+                                    </div>
+                                </div>
+                             </div>
+                        </form>
+                    </div>
+                </div>
+                <!--Column-->
+                <div class="column info-column col-md-4 col-sm-12 col-xs-12">
+                	<h2>آدرس ما</h2>
+                    <ul class="contact-info">
+                        <li><h4>ایمیل</h4>{{ WebsiteSetting.email }}</li>
+                        <li><h4>تلفن</h4><span class="ltr-text">{{ WebsiteSetting.phone_number }}</span> , <span class="ltr-text">+560 565 742</span></li>
+                        <li><h4>آدرس</h4>{{ WebsiteSetting.address }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--End Contact Section-->
+
+    <!--Map Section-->
+    <section class="map-section">
+        <!--Map Outer-->
+        <div class="map-outer">
+       <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d809.6478727081994!2d51.31159426965787!3d35.73626399828561!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMzXCsDQ0JzEwLjYiTiA1McKwMTgnNDQuMSJF!5e0!3m2!1sen!2s!4v1686817996037!5m2!1sen!2s" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </section>
+    <!--End Map Section-->
+<script src={% static "js/jquery.js" %}></script>
+<script src={% static "js/validate.js" %}></script>
+
+
+
+{% endblock %}

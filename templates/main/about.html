@@ -1,0 +1,48 @@
+{% extends "main/layout.html" %}
+{%  block about_us %}
+    
+     <!--Page Title-->
+    <section class="page-title" style="background-image:url(/media/images/page_title/slide1.jpg);">
+    	<div class="auto-container">
+        	<div class="row clearfix">
+            	<!--Title -->
+            	<div class="title-column col-md-6 col-sm-8 col-xs-12">
+                	<h1>درباره ما</h1>
+                </div>
+                <!--Bread Crumb -->
+                <div class="breadcrumb-column col-md-6 col-sm-4 col-xs-12">
+                    <ul class="bread-crumb clearfix">
+                        <li><a href="{% url "main" %}">خانه</a></li>
+                        <li class="active">درباره ما</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--End Page Title-->
+    
+    <!--About FullWidth-->
+    <section class="about-section">
+    	<div class="section-outer clearfix">
+        	<!--Image Column-->
+        	<div class="image-column" style="background-image:url(/media/images/page_title/slide3.jpg);">
+            	<div class="hidden-image"><img src="/media/images/page_title/slide1.jpg" alt=""></div>
+            </div>
+            <div class="content-column">
+            	<div class="content">
+					<!--Sec Title-->
+                    <div class="sec-title">
+                    	<h2>درباره ما</h2>
+                    </div>
+                    <div class="bold-text">آرین توربین<div>
+                    <div class="text">
+                    	<p>{{ WebsiteSetting.desc }}</p>
+                    </div>
+                    <a href="{% url "product_category" %}" class="theme-btn btn-style-one">مشاهده محصولات</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--End About FullWidth-->
+
+    {% endblock %}

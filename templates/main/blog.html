@@ -1,0 +1,90 @@
+{% extends "main/layout.html"  %}
+
+{% block content_list %}
+
+     <!--Page Title-->
+    <section class="page-title" style="background-image:url(/media/images/page_title/slide2.jpg);">
+    	<div class="auto-container">
+        	<div class="row clearfix">
+            	<!--Title -->
+            	<div class="title-column col-md-6 col-sm-8 col-xs-12">
+                	<h1>وبلاگ</h1>
+                </div>
+                <!--Bread Crumb -->
+                <div class="breadcrumb-column col-md-6 col-sm-4 col-xs-12">
+                    <ul class="bread-crumb clearfix">
+                        <li><a href="{% url "main" %}">خانه</a></li>
+                        <li class="active">وبلاگ</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--End Page Title-->
+    
+    <!--Sidebar Page Container-->
+    <div class="sidebar-page-container">
+    	<div class="auto-container">
+        	<div class="row clearfix">
+            	
+                <!--Content Side / Our Blog-->
+                <div class="content-side col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                	<div class="our-blog">
+
+                        {% for content in contents %}
+                             <!--News Block Two-->
+                        <div class="news-block-two">
+                            <div class="inner-box">
+                                <div class="image">
+                                    <a href="{% url "detail_blog" id=content.id %}"><img src={% if content.thumbnail %}{{ content.thumbnail.url }}{% else %}#{% endif %} alt={{ content.title }}></a>
+                                </div>
+                                <div class="lower-content">
+                                    <div class="post-date">{{ content.jpublish }}</div>
+                                    <h3><a href="{% url "detail_blog" id=content.id %}">{{ content.title }}</a></h3>
+                                    <div class="text">{{ content.short_desc }}</div>
+                                    <a class="continue-reading" href="{% url "detail_blog" id=content.id %}">ادامه مطلب <span class="fa fa-long-arrow-left"></span></a>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        {% endfor %}
+
+                        
+
+                        
+                    </div>
+                    
+                    <!-- Styled Pagination -->
+                    <div class="styled-pagination">
+                        <ul class="clearfix">
+                            <li><a href="#" class="active">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a class="next" href="#">بعدی</a></li>
+                        </ul>
+                    </div>
+                    
+                </div>
+                
+                <!--Sidebar Side-->
+                <div class="sidebar-side col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                	<aside class="sidebar blog-sidebar">
+                        
+                    </aside>
+                </div>
+                <!--End Sidebar Side-->
+                
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<!--End pagewrapper-->
+
+<!--Scroll to top-->
+<div class="scroll-to-top scroll-to-target" data-target="html"><span class="icon fa fa-long-arrow-up"></span></div>
+
+
+{% endblock  %}
